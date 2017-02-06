@@ -140,8 +140,8 @@ probe nd_syscall.*.return {
   if (cap && child_of_target(task_current())) {
      capability[execname()] |= cap
      cap_syscall[execname(), name, cap] <<< 1
+     delete cap_use[tid()]
   }
-  delete cap_use[tid()]
 
   # note any prohibited systemcalls
   if (name in badsyscall &&  child_of_target(task_current())) {
